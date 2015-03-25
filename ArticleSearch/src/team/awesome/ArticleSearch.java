@@ -1,10 +1,6 @@
 package team.awesome;
 
-import team.misc.ArrayOrganizer;
-import team.misc.BinarySearcher;
-import team.misc.FileReaderObject;
-import team.misc.MarkUpText;
-import team.misc.URLContentExtractor;
+import team.misc.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,8 +31,8 @@ public class ArticleSearch extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String inputUrl = request.getParameter("URL");
-		URL wordsPath = new URL("http://localhost:8080/ArticleSearch/resources/words.txt");
-		FileReaderObject words = new FileReaderObject(wordsPath);
+		InputStream wordsStream = getClass().getResourceAsStream("/src/main/resources/words.txt");
+		FileReaderObject words = new FileReaderObject(wordsStream);
 		ArrayList<String> wordList = words.sanitizeText(" ,\"");
 
 		URLContentExtractor urlce = new URLContentExtractor();
