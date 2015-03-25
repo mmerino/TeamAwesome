@@ -1,0 +1,42 @@
+body {
+	background-color: #C0C0C0;
+}
+
+h1 {
+	color: black;
+	margin-left: 20px;
+	font-family: "Courier New", Courier, monospace;
+}
+
+h2 {
+	color: black;
+	font-family: "Courier New", Courier, monospace;
+	font-variant: small-caps;
+	margin-left: 20px;
+	font-style: italic;
+}
+
+p {
+	color: teal;
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	text-align: justify;
+	margin-left: 40px;
+	font-style: italic;
+}
+
+ol {
+	color: teal;
+	font-family: "Courier New", Courier, monospace;
+	text-align: justify;
+	margin-left: 20px;
+	type
+	="1";
+}
+
+form {
+	color: teal;
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	text-align: justify;
+	margin-left: 60px;
+	font-style: italic;
+}
