@@ -46,8 +46,10 @@ public class ArticleSearch extends HttpServlet {
 
 			URL url = new URL(inputUrl);
 			String text = urlce.read(url);
+			String baseUri = url.getProtocol() + "://" + url.getHost();
 
-			Document doc = Jsoup.parse(text, "UTF-8");
+			Document doc = Jsoup.parse(text, baseUri);
+
 			Elements elements = doc.select("p");
 			for (Element element : elements) {
 				textArray.add(element.text());
@@ -61,14 +63,26 @@ public class ArticleSearch extends HttpServlet {
 			articleWords.addAll(keySet);
 			String markedText = MarkUpText.markUp(text, articleWords);
 
+			Document markedDoc = Jsoup.parse(markedText, baseUri);
+			Elements css = markedDoc.select("link[href]");
+			for (Element element : css) {
+				if (!element.attr("href").toLowerCase().startsWith("http://")) {
+					element.attr("href", doc.baseUri() + element.attr("href"));
+				}
+			}
+			markedText = markedDoc.html();
+
 			request.setAttribute("marked text", markedText);
 			response.getWriter().write(markedText);
 		} catch (MalformedURLException mue) {
-			request.setAttribute("message","Bad URL. Please input a valid URL.");
-			getServletContext().getRequestDispatcher("/SearchForm.jsp").forward(request, response);
+			request.setAttribute("message",
+					"Bad URL. Please input a valid URL.");
+			getServletContext().getRequestDispatcher("/SearchForm.jsp")
+					.forward(request, response);
 		} catch (Exception exc) {
-			request.setAttribute("message",exc.getMessage());
-			getServletContext().getRequestDispatcher("/SearchForm.jsp").forward(request, response);
+			request.setAttribute("message", exc.getMessage());
+			getServletContext().getRequestDispatcher("/SearchForm.jsp")
+					.forward(request, response);
 		}
 	}
 
