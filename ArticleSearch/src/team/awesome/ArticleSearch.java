@@ -29,7 +29,7 @@ public class ArticleSearch extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
+		
 		try {
 			String inputUrl = request.getParameter("URL");
 			InputStream wordsStream = getClass().getResourceAsStream(
@@ -67,11 +67,14 @@ public class ArticleSearch extends HttpServlet {
 			Elements css = markedDoc.select("link[href]");
 			for (Element element : css) {
 				if (!element.attr("href").toLowerCase().startsWith("http") ) {
-					element.attr("href", doc.baseUri() + element.attr("href"));
+					element.attr("href", markedDoc.baseUri() + element.attr("href"));
 				}
 			}
 			markedText = markedDoc.html();
-
+			
+			request.setCharacterEncoding("utf-8");
+			response.setContentType("text/html");
+			response.setCharacterEncoding("utf-8");
 			request.setAttribute("marked text", markedText);
 			response.getWriter().write(markedText);
 		} catch (MalformedURLException mue) {
