@@ -11,9 +11,10 @@
 <body>
 	<p>This is a SAT word search. Enter a URL of your choice to find
 		SAT words contained within.</p>
+	<p>${message}</p>
 	<form action="search" method="post">
-		<input type="text" name="URL" placeholder="Enter URL here"> <br>
-		<br> <input type="submit" value="Submit">
+		<input type="text" name="URL" placeholder="Enter URL here" required>
+		<br> <br> <input type="submit" value="Submit">
 	</form>
 </body>
 </html>

@@ -5,6 +5,7 @@ ehthumbs.db
 .metadata
 RemoteSystemsTempFiles
 ArticleSearch/build
+.classpath
 
 # Folder config file
 Desktop.ini
