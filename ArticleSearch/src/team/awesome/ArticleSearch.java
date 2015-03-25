@@ -66,7 +66,7 @@ public class ArticleSearch extends HttpServlet {
 			Document markedDoc = Jsoup.parse(markedText, baseUri);
 			Elements css = markedDoc.select("link[href]");
 			for (Element element : css) {
-				if (!element.attr("href").toLowerCase().startsWith("http://")) {
+				if (!element.attr("href").toLowerCase().startsWith("http") ) {
 					element.attr("href", doc.baseUri() + element.attr("href"));
 				}
 			}
