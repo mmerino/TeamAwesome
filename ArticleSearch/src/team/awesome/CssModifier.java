@@ -17,6 +17,9 @@ public class CssModifier {
 	}
 
 	protected String modifyCss() {
+		if (markedText == null || markedText.equals("") || baseUri == null || baseUri.equals("")) {
+			return markedText;
+		}
 		// Changes relative CSS URL paths to absolute for proper site display
 		Document markedDoc = Jsoup.parse(markedText, baseUri);
 		Elements css = markedDoc.select("link[href]");

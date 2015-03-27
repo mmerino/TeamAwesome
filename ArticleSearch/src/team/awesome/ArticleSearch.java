@@ -28,7 +28,7 @@ public class ArticleSearch extends HttpServlet {
 		try {
 			String inputUrl = request.getParameter("URL");
 			InputStream wordsStream = getClass().getResourceAsStream(
-					"/src/main/resources/words.txt");
+					"/resources/words.txt");
 			ArrayList<String> wordList = new FileReaderObject(wordsStream)
 					.sanitizeText(" ,\"");
 
@@ -40,7 +40,6 @@ public class ArticleSearch extends HttpServlet {
 			String markedText = MarkUpText.markUp(siteText, matchingWords);
 			markedText = new CssModifier(markedText, baseUri).getCssText();
 
-			request.setCharacterEncoding("utf-8");
 			response.setContentType("text/html");
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().write(markedText);
